@@ -5,7 +5,7 @@
   color: var(--text-primary);
   flex-direction: column;
   width: $length;
-  height: 618px;
+  height: 100%;
   padding-bottom: var(--space-xl);
   background-color: var(--card-bg);
   &>img{
@@ -30,11 +30,12 @@
   color: var(--text-secondary);
 }
 .card__bottom{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 var(--space-xs);
-    margin-top: auto; /* Прижимает к низу */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 var(--space-xs);
+  margin-top: auto;
+
 }
 .contentSlot{
   font-weight: bold;

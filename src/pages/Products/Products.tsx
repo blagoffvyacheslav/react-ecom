@@ -10,7 +10,7 @@ import Text from 'components/Text'
 import {Category, Product} from "pages/ProductCard/constants/productConstants"
 import {ProductModelToCardProps} from 'mappers/productMapper'
 import PageNumbers from './components/PageNumbers'
-import styles from './index.module.scss'
+import styles from './Products.module.scss'
 import {getProducts} from "./GetProducts";
 import {getCategories} from "./GetCategories";
 

@@ -5,6 +5,7 @@ import BlockContainer from 'components/BlockContainer'
 import RelatedItems from './components/RelatedItems'
 import ProductItem from "pages/ProductCard/components/ProductItem";
 import {getProduct} from "./GetProduct";
+import styles from './ProductCard.module.scss'
 
 
 const ProductCard = () => {
@@ -19,7 +20,7 @@ const ProductCard = () => {
 
     },[location])
     return (
-        <div>
+        <div className={styles.ProductCard}>
             {product ?<>
                 <BlockContainer>
                 <ProductItem product={product}/>

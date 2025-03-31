@@ -48,6 +48,7 @@
   align-items: center;
   gap: 12px;
   font-weight: 800;
+  font-size: 24px;
 }
 
 @mixin item-line {
@@ -119,6 +120,7 @@
   padding: 32px 0 36px 0;
 
   &.current {
+    font-weight: bold; /* Добавляем жирное начертание текста */
     color: var(--text-accent);
     border-bottom: 3px solid var(--text-accent);
   }

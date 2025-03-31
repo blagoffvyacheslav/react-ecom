@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "strict": true,
+    "paths":
+    {
+      "components": [
+        "components/*"
+      ],
+      "mappers": [
+        "mappers/*"
+      ],
+      "config": [
+        "config/*"
+      ],
+      "styles": [
+        "styles/*"
+      ],
+      "utils": [
+        "utils/*"
+      ],
+      "App": [
+        "App/*"
+      ],
+      "pages": [
+        "pages/*"
+      ]
+    },
+    "files": [],
+    "references": [
+      {
+        "path": "./tsconfig.app.json"
+      },
+      {
+        "path": "./tsconfig.node.json"
+      }
+    ]
+  }
+}

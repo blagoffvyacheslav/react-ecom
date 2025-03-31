@@ -1,0 +1,41 @@
+.card{
+  text-align: left;
+  $length: 348px;
+  display: flex;
+  color: var(--text-primary);
+  flex-direction: column;
+  width: $length;
+  height: 618px;
+  padding-bottom: var(--space-xl);
+  background-color: var(--card-bg);
+  &>img{
+    background-color: var(--card-image-bg);
+    height: $length;
+  }
+  &:hover{
+    box-shadow: var(--shadow);
+  }
+
+}
+.card__text{
+  padding-top: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxs);
+  margin: var(--space-xs);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-l);
+}
+.caption{
+  color: var(--text-secondary);
+}
+.card__bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 var(--space-xs);
+    margin-top: auto; /* Прижимает к низу */
+}
+.contentSlot{
+  font-weight: bold;
+}

@@ -6,7 +6,6 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
-  //align-self: center;
   justify-content: center;
   text-align: center;
   @media(max-width: 1023px){
@@ -29,7 +28,6 @@
   }
 }
 .searchBar{
-  //@extend .mainContent;
   display: flex;
   gap: var(--space-xl);
   margin-bottom: var(--space-xl);
@@ -69,7 +67,6 @@
   display: flex;
   justify-content: left;
   flex-wrap: wrap;
-  //gap: 118px;
   gap: 45px;
   & a{
     text-decoration: none;

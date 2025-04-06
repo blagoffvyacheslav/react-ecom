@@ -1,7 +1,8 @@
-import cn from 'classnames'
-import * as React from 'react'
-import CheckIcon from '../icons/CheckIcon'
-import styles from './Checkbox.module.scss'
+import cn from 'classnames';
+import * as React from 'react';
+import CheckIcon from '../icons/CheckIcon';
+import styles from './Checkbox.module.scss';
+import { ColorEnum } from '../../types/colorEnum';
 
 export type CheckBoxProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -11,12 +12,25 @@ export type CheckBoxProps = Omit<
   onChange: (checked: boolean) => void;
 };
 
-const CheckBox: React.FC<CheckBoxProps> = ({onChange, ...props
-}) => {
-  return <label className={cn(props.className, styles.checkbox, {[styles.disabled]: props.disabled})}>
-    <input {...props} type="checkbox" onClick={() => onChange(!props.checked)}/>
-    <CheckIcon color={props.disabled ? 'secondary' : 'accent'} width={40} height={40}/>
-  </label>
-}
+const CheckBox: React.FC<CheckBoxProps> = ({ onChange, ...props }) => {
+  return (
+    <label
+      className={cn(props.className, styles.checkbox, {
+        [styles._disabled]: props.disabled,
+      })}
+    >
+      <input
+        {...props}
+        type="checkbox"
+        onClick={() => onChange(!props.checked)}
+      />
+      <CheckIcon
+        color={props.disabled ? ColorEnum.Secondary : ColorEnum.Accent}
+        width={40}
+        height={40}
+      />
+    </label>
+  );
+};
 
-export default CheckBox
+export default CheckBox;

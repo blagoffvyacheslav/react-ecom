@@ -1,42 +1,45 @@
-.multiDropdown{
-    text-align: center;
-    &.isOpen {
-        position: relative;
-        &> :first-child {
-            border: 1px solid var(--input-border-focus);
-        }
+@use 'colors' as *;
+@use 'spacing' as *;
+
+.multiDropdown {
+  text-align: center;
+  &._isOpen {
+    position: relative;
+    & > :first-child {
+      border: 1px solid $input-border-focus;
     }
-    padding: 0;
-    cursor: pointer;
+  }
+  padding: 0;
+  cursor: pointer;
 }
 
-.value{
-    padding: 27px 62px;
+.value {
+  padding: 27px 62px;
 }
 
-.optionsParent{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    background-color: var(--dropdown-options-bg);
-    color: var(--input-text);
-    box-shadow: var(--shadow);
-    transform: translateY(calc(var(--space-xxs) + 100%));
+.optionsParent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: $dropdown-options-bg;
+  color: $input-text;
+  box-shadow: var(--shadow);
+  transform: translateY(calc($space-xxs + 100%));
 }
 
-.option{
-    height: 48px;
-    display: flex;
-    align-items: center;
-    padding: var(--space-s) var(--space-xs);
-    &:hover{
-        color: var(--text-secondary);
-    }
+.option {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: $space-s $space-xs;
+  &:hover {
+    color: $text-secondary;
+  }
 }
 
-.selected{
-    color: var(--text-accent);
+.selected {
+  color: $text-accent;
 }

@@ -1,1 +1,1 @@
-export { default } from './PageNumbers'
+export { default } from './PageNumbers';

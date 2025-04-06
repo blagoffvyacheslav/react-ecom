@@ -1,4 +1,17 @@
-.mainContent {
-  margin-left: 7%;
-  margin-right: 7%;
+@use 'spacing';
+
+@mixin block-container {
+  display: flex;
+  flex-direction: row;
+  max-width: 1440px;
+  margin-left: spacing.$spacing-70;
+  margin-right: spacing.$spacing-70;
+  @media (max-width: 1023px) {
+    padding: 0 24px;
+  }
+}
+
+@mixin internal-container {
+  padding-left: spacing.$spacing-80;
+  padding-right: spacing.$spacing-80;
 }

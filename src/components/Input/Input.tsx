@@ -1,6 +1,6 @@
-import cn from 'classnames'
-import * as React from 'react'
-import styles from './Input.module.scss'
+import cn from 'classnames';
+import * as React from 'react';
+import styles from './Input.module.scss';
 
 export type InputProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -15,9 +15,17 @@ export type InputProps = Omit<
 };
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({onChange,afterSlot,className,onClick,...props},ref) => <div onClick={onClick} className={cn(className,styles.input)}>
-    <input {...props} type="text" onChange={(e)=>onChange(e.target.value)} ref={ref}/>
-    {afterSlot}
-  </div>)
+  ({ onChange, afterSlot, className, onClick, ...props }, ref) => (
+    <div onClick={onClick} className={cn(className, styles.input)}>
+      <input
+        {...props}
+        type="text"
+        onChange={(e) => onChange(e.target.value)}
+        ref={ref}
+      />
+      {afterSlot}
+    </div>
+  )
+);
 
-export default Input
+export default Input;

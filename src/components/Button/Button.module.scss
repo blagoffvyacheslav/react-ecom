@@ -1,52 +1,51 @@
+@use 'colors' as *;
+@use 'spacing' as *;
+
 .button {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: var(--space-xxs);
+  gap: $space-xxs;
   font-size: 18px;
-  padding: var(--space-s) var(--space-l);
+  padding: $space-s $space-l;
   border: 0;
 
-  &.disabled {
-    background: var(--button-primary-bg-disabled);
-    $c: var(--button-primary-text-disabled);
-    color: $c;
+  &._disabled {
+    background: $button-primary-bg-disabled;
+    color: $button-primary-text-disabled;
 
-    &, & svg {
-      fill: $c !important;
+    &,
+    & svg {
+      fill: $button-primary-text-disabled !important;
     }
   }
 
-  &:not(.disabled):not(.loading):hover {
-    background: var(--button-primary-bg-hover);
-    $c: var(--button-primary-text-hover);
-    color: $c;
+  &:not(._disabled):not(.loading):hover {
+    background: $button-primary-bg-hover;
+    color: $button-primary-text-hover;
 
-    &, & svg {
-      fill: $c !important;
+    &,
+    & svg {
+      fill: $button-primary-text-hover !important;
     }
   }
-
-
 }
 
 .buttonSkin_primary {
-  background: var(--button-primary-bg);
-  $c: var(--button-primary-text);
-  color: $c;
+  background: $button-primary-bg;
+  color: $button-primary-text;
 
   & svg {
-    fill: $c !important;
+    fill: $button-primary-text !important;
   }
 }
 
 .buttonSkin_secondary {
-  background: var(--button-secondary-bg);
-  $c: var(--button-secondary-text);
-  color: $c;
+  background: $button-secondary-bg;
+  color: $button-secondary-text;
 
   & svg {
-    fill: $c !important;
+    fill: $button-secondary-text !important;
   }
-  border: 1px solid var(--button-secondary-border-color);
+  border: 1px solid $button-secondary-border-color;
 }

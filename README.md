@@ -1,54 +1,68 @@
-# React + TypeScript + Vite
+# 🛍 ECommerce
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🎨 Интерфейс интернет-магазина, разработанный на основе макета из [Figma](https://www.figma.com/design/V105wd67bkF2X7oOzCLPEG/E-commerce). Приложение демонстрирует витрину товаров, корзину и функциональность взаимодействия с пользователем.
 
-Currently, two official plugins are available:
+## 🚀 Стек технологий
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React**
+- **TypeScript**
+- **MobX** — управление состоянием
+- **React Router** — маршрутизация
+- **Vite** — сборка
+- **Prettier & ESLint** — стиль и качество кода
 
-## Expanding the ESLint configuration
+## 🛠 Установка и запуск проекта
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```bash
+# Установка зависимостей
+npm install
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+# Запуск в режиме разработки
+npm run dev
+vite dev
+
+# Сборка проекта
+npm run build
+
+# Запуск ESLint
+npm run lint
+
+# Автофикс линтера
+npm run lint:fix
+
+# Форматирование Prettier
+npm run format
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📀 Настройка Prettier
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+📂 **.prettierrc**:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```json
+{
+  "singleQuote": true,
+  "semi": true,
+  "trailingComma": "es5",
+  "printWidth": 80,
+  "tabWidth": 2,
+  "arrowParens": "avoid"
+}
 ```
+
+📅 **Добавление prettier в зависимости:**
+
+```bash
+npm install --save-dev prettier
+```
+
+**package.json**:
+
+```json
+"scripts": {
+  "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\""
+}
+```
+
+---
+
+📅 Проект в разработке.

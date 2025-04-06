@@ -1,20 +1,16 @@
-@import 'styles';
-
-@mixin bottom-line {
-  border-bottom: 1px #F3F3F3 solid;
-}
-
+@use 'mixins';
+@use 'styles';
+@use 'colors' as *;
 
 .header {
-  //width: 100%;
+  width: 1440px;
   position: sticky;
   top: 0;
-  background-color: var(--header-bg);
+  background-color: $header-bg;
   & a {
     text-decoration: none;
   }
-  @extend .mainContent;
-  @media(max-width: 1023px) {
+  @media (max-width: 1023px) {
     border-bottom: 0;
     padding-top: 20px;
     margin-bottom: 50px;
@@ -22,11 +18,14 @@
 }
 
 .header__inner {
+  @include styles.block-container;
+  padding-left: 7%;
+  padding-right: 7%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @include bottom-line;
-  @media(max-width: 1023px) {
+  @include mixins.bottom-line;
+  @media (max-width: 1023px) {
     flex-direction: column;
   }
 }
@@ -34,8 +33,8 @@
 .logoAndItem {
   display: flex;
   justify-content: space-between;
-  @media(max-width: 1023px) {
-    @include bottom-line;
+  @media (max-width: 1023px) {
+    @include mixins.bottom-line;
     padding-bottom: 15px;
     margin-bottom: 5px;
     width: 100%;
@@ -64,30 +63,29 @@
   flex-direction: column;
   justify-content: center;
   gap: 6.25px;
-  @media(max-width: 1023px) {
+  width: 35px;
+  @media (max-width: 1023px) {
     display: flex;
   }
-  width: 35px;
 
-  &::before, &::after {
+  &::before,
+  &::after {
     content: '';
     @include item-line;
   }
-
 }
 
 .item > * {
   @include item-line;
 }
 
-#menu__checkbox:checked ~ .logoAndItem > .item {
+.menu__checkbox:checked ~ .logoAndItem > .item {
   & > * {
     opacity: 0;
   }
 
   &::before {
     transform: rotate(-45deg) translate(-6px, 6px);
-
   }
 
   &::after {
@@ -95,7 +93,7 @@
   }
 }
 
-#menu__checkbox {
+.menu__checkbox {
   display: none;
 }
 
@@ -103,33 +101,33 @@
   display: flex;
   gap: 60px;
   align-items: center;
-  @media(max-width: 1023px) {
+  @media (max-width: 1023px) {
     display: none;
-    background-color: var(--header-bg);
+    background-color: $header-bg;
     flex-direction: column;
     gap: 0;
     order: 2;
   }
 }
 
-#menu__checkbox:checked ~ .nav {
+.menu__checkbox:checked ~ .nav {
   display: flex;
 }
 
 .nav a {
   padding: 32px 0 36px 0;
 
-  &.current {
+  &._current {
     font-weight: bold; /* Добавляем жирное начертание текста */
-    color: var(--text-accent);
-    border-bottom: 3px solid var(--text-accent);
+    color: $text-accent;
+    border-bottom: 3px solid $text-accent;
   }
 
-  @media(max-width: 1023px) {
+  @media (max-width: 1023px) {
     padding: 15px 20px;
-    &.current {
-      color: var(--text-accent);
-      border: 3px solid var(--text-accent);
+    &._current {
+      color: $text-accent;
+      border: 3px solid $text-accent;
     }
   }
 }
@@ -142,13 +140,13 @@
 .right {
   display: flex;
   gap: 24px;
-  @media(max-width: 1023px) {
+  @media (max-width: 1023px) {
     order: 1;
     display: none;
   }
 }
 
-#menu__checkbox:checked ~ .right {
+.menu__checkbox:checked ~ .right {
   display: flex;
 }
 
@@ -161,6 +159,3 @@
   @include icon;
   background-image: url('./img/user.svg');
 }
-
-
-

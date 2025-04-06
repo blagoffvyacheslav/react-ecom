@@ -1,44 +1,49 @@
-.text{
+@use 'colors' as *;
+
+.text {
   display: block;
   overflow: hidden;
-  //line-height: 1.25em;
-  //text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  //word-break: break-all;
   overflow-wrap: anywhere;
-  &:global(.vtitle){
+
+  & {
+    -webkit-line-clamp: var(--max-lines, none);
+  }
+
+  &:global(.vtitle) {
     font-size: 44px;
     font-weight: bold;
   }
-  &:global(.vp-20){
+  &:global(.vp-20) {
     font-size: 20px;
   }
-  &:global(.vp-18),&:global(.vbutton){
+  &:global(.vp-18),
+  &:global(.vbutton) {
     font-size: 18px;
   }
-  &:global(.vp-16){
+  &:global(.vp-16) {
     font-size: 16px;
   }
-  &:global(.vp-14){
+  &:global(.vp-14) {
     font-size: 14px;
   }
-  &:global(.wnormal){
+  &:global(.wnormal) {
     font-weight: normal;
   }
-  &:global(.wmedium){
+  &:global(.wmedium) {
     font-weight: 500;
   }
-  &:global(.wbold){
+  &:global(.wbold) {
     font-weight: bold;
   }
-  &:global(.cprimary){
-    color: var(--text-primary);
+  &:global(.cprimary) {
+    color: $text-primary;
   }
-  &:global(.csecondary){
-    color: var(--text-secondary);
+  &:global(.csecondary) {
+    color: $text-secondary;
   }
-  &:global(.caccent){
-    color: var(--text-accent);
+  &:global(.caccent) {
+    color: $text-accent;
   }
 }

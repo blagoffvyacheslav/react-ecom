@@ -1,13 +1,12 @@
-import {Product} from 'pages/ProductCard/constants/productConstants'
-import {CardProps} from 'components/Card'
+import { Product } from 'pages/ProductCard/constants/product';
+import { CardProps } from 'components/Card';
 
-export function ProductModelToCardProps(product:Product): CardProps {
-    return {
-        captionSlot:product.category.name,
-        contentSlot:product.price,
-        description:product.description,
-        image:product.images[0],
-        title:product.title,
-
-    }
+export function ProductModelToCardProps(product: Product): CardProps {
+  return {
+    captionSlot: product.category.name,
+    contentSlot: product.price,
+    description: product.description,
+    image: product.images[0],
+    title: product.title,
+  };
 }

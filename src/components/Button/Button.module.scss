@@ -1,0 +1,51 @@
+@use 'colors' as *;
+@use 'spacing' as *;
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $space-xxs;
+  font-size: 18px;
+  padding: $space-s $space-l;
+  border: 0;
+
+  &._disabled {
+    background: $button-primary-bg-disabled;
+    color: $button-primary-text-disabled;
+
+    &,
+    & svg {
+      fill: $button-primary-text-disabled !important;
+    }
+  }
+
+  &:not(._disabled):not(.loading):hover {
+    background: $button-primary-bg-hover;
+    color: $button-primary-text-hover;
+
+    &,
+    & svg {
+      fill: $button-primary-text-hover !important;
+    }
+  }
+}
+
+.buttonSkin_primary {
+  background: $button-primary-bg;
+  color: $button-primary-text;
+
+  & svg {
+    fill: $button-primary-text !important;
+  }
+}
+
+.buttonSkin_secondary {
+  background: $button-secondary-bg;
+  color: $button-secondary-text;
+
+  & svg {
+    fill: $button-secondary-text !important;
+  }
+  border: 1px solid $button-secondary-border-color;
+}

@@ -1,0 +1,43 @@
+@use 'colors' as *;
+@use 'spacing' as *;
+
+.card {
+  text-align: left;
+  $length: 348px;
+  display: flex;
+  color: $text-primary;
+  flex-direction: column;
+  width: $length;
+  height: 100%;
+  padding-bottom: $space-xl;
+  background-color: $card-bg;
+  & > img {
+    background-color: $card-image-bg;
+    height: $length;
+  }
+  &:hover {
+    box-shadow: var(--shadow);
+  }
+  &__text {
+    padding-top: $space-xl;
+    display: flex;
+    flex-direction: column;
+    gap: $space-xxs;
+    margin: $space-xs;
+    margin-top: $space-xl;
+    margin-bottom: $space-l;
+  }
+  &__caption {
+    color: $text-secondary;
+  }
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 $space-xs;
+    margin-top: auto;
+  }
+  &__contentSlot {
+    font-weight: bold;
+  }
+}

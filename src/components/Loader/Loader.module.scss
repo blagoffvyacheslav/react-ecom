@@ -1,0 +1,26 @@
+@use 'colors' as *;
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &._loader_s {
+    height: 24px;
+    width: 24px;
+  }
+
+  &._loader_m {
+    height: 48px;
+    width: 48px;
+  }
+
+  &._loader_l {
+    height: 60px;
+    width: 60px;
+  }
+
+  & svg {
+    fill: $loader-bg;
+  }
+}

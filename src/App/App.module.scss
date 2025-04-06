@@ -1,0 +1,8 @@
+.app {
+  display: flex;
+  place-items: center;
+  flex-direction: column;
+  //display: grid;
+  height: 100vh;
+  min-width: 320px; // Устанавливаем минимальную ширину
+}

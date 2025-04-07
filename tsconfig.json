@@ -17,7 +17,8 @@
       "spacing": ["spacing/*"],
       "utils": ["utils/*"],
       "App": ["App/*"],
-      "pages": ["pages/*"]
+      "pages": ["pages/*"],
+      "store": ["store/*"]
     },
     "files": [],
     "references": [

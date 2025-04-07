@@ -1,30 +1,37 @@
-import { SetStateAction, useEffect, useState } from 'react';
+import React from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Product as ProductModel } from 'pages/ProductCard/constants/product';
 import RelatedItems from './components/RelatedItems';
 import ProductItem from 'pages/ProductCard/components/ProductItem';
-import { getProduct } from './getProduct';
 import styles from './ProductCard.module.scss';
+import { observer, useLocalObservable } from 'mobx-react-lite';
+import ProductCardStore from '../../store/ProductCardStore/ProductCardStore';
+import { Meta } from '../../utils/meta';
 
 const ProductCard = () => {
   const URLparams = useParams() as { id: string | undefined };
-  const [product, setProduct] = useState<ProductModel>();
+  const [product, setProduct] = React.useState<ProductModel | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
-  useEffect(() => {
+
+  const productCardStore = useLocalObservable(() => new ProductCardStore());
+
+  React.useEffect(() => {
     if (URLparams.id === undefined) {
       navigate('/');
     } else {
-      getProduct(URLparams.id).then(
-        (response: { data: SetStateAction<ProductModel | undefined> }) =>
-          setProduct(response.data)
-      );
+      productCardStore.getProductCard({ productId: URLparams.id });
     }
-  }, [location]);
+  }, [URLparams.id, navigate, productCardStore]);
+
+  React.useEffect(() => {
+    setProduct(productCardStore.item);
+  }, [location, productCardStore.meta, productCardStore.item]);
+
   return (
     <div className={styles.blockContainer}>
       <div className={styles.ProductCard}>
-        {product ? (
+        {product && productCardStore.meta == Meta.success ? (
           <>
             <ProductItem product={product} />
             <RelatedItems category={product.category} />
@@ -34,4 +41,4 @@ const ProductCard = () => {
     </div>
   );
 };
-export default ProductCard;
+export default observer(ProductCard);

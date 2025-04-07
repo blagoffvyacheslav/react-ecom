@@ -175,7 +175,6 @@ export const Products = () => {
         )
       : sourceList;
 
-    // Фильтрация по выбранной категории
     if (selectedCategories.length > 0) {
       return filteredList.length;
     }

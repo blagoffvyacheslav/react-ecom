@@ -9,9 +9,9 @@ import {
 import { Meta } from '../../utils/meta';
 import {
   action,
-  computed,
+  computed, IReactionDisposer,
   makeObservable,
-  observable,
+  observable, reaction,
   runInAction,
 } from 'mobx';
 import { API_URL } from '../../pages/ProductCard/constants/api';
@@ -26,6 +26,8 @@ export default class ProductCategoryStore
   private _list: ProductItemModel[] = [];
   private _meta: Meta = Meta.initial;
 
+  private _disposer: IReactionDisposer | null = null;
+
   constructor() {
     makeObservable<ProductCategoryStore, PrivateFields>(this, {
       _list: observable.ref,
@@ -35,7 +37,13 @@ export default class ProductCategoryStore
       reset: action,
       getProductsList: action,
     });
+    this._disposer = reaction(
+      () => this._list,
+      () => {
+      }
+    );
   }
+
 
   get list(): ProductItemModel[] {
     return this._list;
@@ -74,5 +82,8 @@ export default class ProductCategoryStore
 
   destroy(): void {
     this.reset();
+    if (this._disposer) {
+      this._disposer();
+    }
   }
 }

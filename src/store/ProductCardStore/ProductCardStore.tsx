@@ -6,9 +6,9 @@ import { IProductCardStore, GetProductCardParams } from './types';
 import { Meta } from '../../utils/meta';
 import {
   action,
-  computed,
+  computed, IReactionDisposer,
   makeObservable,
-  observable,
+  observable, reaction,
   runInAction,
 } from 'mobx';
 import { API_URL } from '../../pages/ProductCard/constants/api';
@@ -23,6 +23,8 @@ export default class ProductCardStore
   private _item: ProductItemModel | null = null;
   private _meta: Meta = Meta.initial;
 
+  private _disposer: IReactionDisposer | null = null;
+
   constructor() {
     makeObservable<ProductCardStore, PrivateFields>(this, {
       _item: observable,
@@ -32,6 +34,11 @@ export default class ProductCardStore
       reset: action,
       getProductCard: action,
     });
+    this._disposer = reaction(
+      () => this._item,
+      () => {
+      }
+    );
   }
 
   get item(): ProductItemModel | null {
@@ -71,5 +78,8 @@ export default class ProductCardStore
 
   destroy(): void {
     this.reset();
+    if (this._disposer) {
+      this._disposer();
+    }
   }
 }

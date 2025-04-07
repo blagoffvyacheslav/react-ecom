@@ -16,10 +16,14 @@ import { CategoryItemModel } from '../models/categoryItem';
 
 type PrivateFields = '_list' | '_meta';
 
+import { reaction, IReactionDisposer } from 'mobx';
+
 export default class CategoryStore implements ICategoryStore, ILocalStore {
   private readonly _apiStore = new ApiStore(API_URL);
   private _list: CategoryItemModel[] = [];
   private _meta: Meta = Meta.initial;
+
+  private _disposer: IReactionDisposer | null = null;
 
   constructor() {
     makeObservable<CategoryStore, PrivateFields>(this, {
@@ -30,6 +34,12 @@ export default class CategoryStore implements ICategoryStore, ILocalStore {
       reset: action,
       getCategoryList: action,
     });
+
+    this._disposer = reaction(
+      () => this._list,
+      () => {
+      }
+    );
   }
 
   get list(): CategoryItemModel[] {
@@ -69,5 +79,8 @@ export default class CategoryStore implements ICategoryStore, ILocalStore {
 
   destroy(): void {
     this.reset();
+    if (this._disposer) {
+      this._disposer();
+    }
   }
 }

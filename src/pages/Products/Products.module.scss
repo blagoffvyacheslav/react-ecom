@@ -3,6 +3,8 @@
 @use 'spacing' as *;
 
 .products {
+  align-self: center;
+  width: 1370px;
   @include styles.internal-container;
   display: flex;
   flex-direction: column;
@@ -19,6 +21,7 @@
   background-color: #fafafa;
   padding-top: 100px;
 }
+
 
 .p1 {
   align-self: center;

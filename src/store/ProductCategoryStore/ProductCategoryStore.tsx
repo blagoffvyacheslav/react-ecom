@@ -9,9 +9,11 @@ import {
 import { Meta } from '../../utils/meta';
 import {
   action,
-  computed, IReactionDisposer,
+  computed,
+  IReactionDisposer,
   makeObservable,
-  observable, reaction,
+  observable,
+  reaction,
   runInAction,
 } from 'mobx';
 import { API_URL } from '../../pages/ProductCard/constants/api';
@@ -39,11 +41,9 @@ export default class ProductCategoryStore
     });
     this._disposer = reaction(
       () => this._list,
-      () => {
-      }
+      () => {}
     );
   }
-
 
   get list(): ProductItemModel[] {
     return this._list;

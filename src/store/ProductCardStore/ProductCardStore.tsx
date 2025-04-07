@@ -6,9 +6,11 @@ import { IProductCardStore, GetProductCardParams } from './types';
 import { Meta } from '../../utils/meta';
 import {
   action,
-  computed, IReactionDisposer,
+  computed,
+  IReactionDisposer,
   makeObservable,
-  observable, reaction,
+  observable,
+  reaction,
   runInAction,
 } from 'mobx';
 import { API_URL } from '../../pages/ProductCard/constants/api';
@@ -36,8 +38,7 @@ export default class ProductCardStore
     });
     this._disposer = reaction(
       () => this._item,
-      () => {
-      }
+      () => {}
     );
   }
 

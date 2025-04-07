@@ -37,8 +37,7 @@ export default class CategoryStore implements ICategoryStore, ILocalStore {
 
     this._disposer = reaction(
       () => this._list,
-      () => {
-      }
+      () => {}
     );
   }
 

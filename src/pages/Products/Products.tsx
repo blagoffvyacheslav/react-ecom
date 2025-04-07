@@ -82,6 +82,14 @@ export const Products = () => {
   }, [categoryStore, productStore, location.search]);
 
   useEffect(() => {
+    if (searchTerm) {
+      const newParams = new URLSearchParams(location.search);
+      newParams.set('title', searchTerm);
+      navigate({ search: newParams.toString() }, { replace: true });
+    }
+  }, [searchTerm, navigate, location.search]);
+
+  useEffect(() => {
     if (categoryStore.list) {
       setOptions(categoryStore.list.map(categoriesToOptions));
       const categoryIdFromURL = queryParams.get('categoryId');

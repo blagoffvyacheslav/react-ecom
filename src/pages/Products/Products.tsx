@@ -1,5 +1,10 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useCallback } from 'react';
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from 'react-router-dom';
 import Button from 'components/Button';
 import Card from 'components/Card';
 import Input from 'components/Input';
@@ -10,57 +15,166 @@ import { Category, Product } from 'pages/ProductCard/constants/product';
 import { ProductModelToCardProps } from 'mappers/productMapper';
 import PageNumbers from './components/PageNumbers';
 import styles from './Products.module.scss';
-import { getProducts } from './getProducts';
-import { getCategories } from './getCategories';
 import { ColorEnum } from '../../types/colorEnum';
+import { ELEMENTS_PER_PAGE } from './constants/products';
+import { observer, useLocalObservable } from 'mobx-react-lite';
+import ProductStore from '../../store/ProductStore/ProductStore';
+import { Meta } from '../../utils/meta';
+import CategoryStore from '../../store/CategoryStore/CategoryStore';
+import ProductCategoryStore from '../../store/ProductCategoryStore/ProductCategoryStore';
 
-const Products = () => {
-  const [allProducts, setAllProducts] = useState<Product[]>();
-  const [currentProducts, setCurrentProducts] = useState<Product[]>();
-  const [selectedCategories] = useState<Category[]>([]);
-  const totalElements = allProducts ? allProducts.length : 0;
-  const elementsPerPage = 9;
-  const totalPages = Math.ceil(totalElements / elementsPerPage);
-  const [currentPage, setCurrentPage] = useState<number>(0);
-  useEffect(() => {
-    if (selectedCategories.length === 0)
-      getProducts().then((response) => setAllProducts(response.data));
-    else {
-      Promise.all(selectedCategories.map((v) => getProducts(Number(v)))).then(
-        (rs) =>
-          setAllProducts(
-            rs
-              .map((r) => r.data)
-              .reduce(
-                (allProducts, products) => [...allProducts, ...products],
-                []
-              )
-          )
-      );
-    }
-  }, [selectedCategories]);
-  useEffect(
-    () =>
-      setCurrentProducts(
-        allProducts?.slice(
-          currentPage * elementsPerPage,
-          currentPage * elementsPerPage + elementsPerPage
-        )
-      ),
-    [currentPage, allProducts]
+export const Products = () => {
+  const [currentProducts, setCurrentProducts] = React.useState<Product[]>([]);
+  const [selectedCategories, setSelectedCategories] = React.useState<Option[]>(
+    []
   );
+  const [searchTerm, setSearchTerm] = React.useState('');
+  const [currentPage, setCurrentPage] = React.useState<number>(0);
+  const [options, setOptions] = React.useState<Option[]>([]);
+
+  const elementsPerPage = ELEMENTS_PER_PAGE;
+
+  const productStore = useLocalObservable(() => new ProductStore());
+  const categoryStore = useLocalObservable(() => new CategoryStore());
+  const productsCategoryStore = useLocalObservable(
+    () => new ProductCategoryStore()
+  );
+
+  const activeProductsStore = React.useRef(productStore);
+  const pageNumber = React.useRef<number>(0);
+
   const categoriesToOptions = (v: Category): Option => ({
     key: `${v.id}`,
     value: v.name,
   });
+
+  const location = useLocation();
+
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  const queryParams = new URLSearchParams(location.search);
+
   useEffect(() => {
-    getCategories().then((categories) => {
-      return setOptions(
-        categories ? categories.data.map(categoriesToOptions) : []
-      );
-    });
-  }, []);
-  const [options, setOptions] = useState<Option[]>();
+    const pageFromUrl = queryParams.get('page');
+    if (pageFromUrl) {
+      setCurrentPage(Number(pageFromUrl) - 1);
+    }
+  }, [queryParams]);
+
+  useEffect(() => {
+    const currentParam = Number(searchParams.get('page'));
+    if (currentParam !== currentPage + 1) {
+      const newParams = new URLSearchParams(searchParams.toString());
+      newParams.set('page', (currentPage + 1).toString());
+      navigate({ search: newParams.toString() }, { replace: true });
+    }
+  }, [currentPage]);
+
+  useEffect(() => {
+    const title = queryParams.get('title');
+    if (title !== null) {
+      productStore.getProductsList({ title: title });
+    } else {
+      productStore.getProductsList({});
+    }
+    categoryStore.getCategoryList();
+  }, [categoryStore, productStore, location.search]);
+
+  useEffect(() => {
+    if (categoryStore.list) {
+      setOptions(categoryStore.list.map(categoriesToOptions));
+      const categoryIdFromURL = queryParams.get('categoryId');
+
+      const findValueByKey = (key: string) => {
+        const option = options.find((option) => option.key === key);
+        return option ? option.value : undefined;
+      };
+
+      if (categoryIdFromURL) {
+        setSelectedCategories([
+          {
+            key: categoryIdFromURL,
+            value: findValueByKey(categoryIdFromURL),
+          },
+        ]);
+      }
+    }
+  }, [categoryStore.meta, categoryStore.list, location.search]);
+
+  useEffect(() => {
+    if (selectedCategories.length > 0) {
+      const newKey = selectedCategories[0].key;
+      productsCategoryStore.getProductsList({ categoryId: newKey });
+      activeProductsStore.current = productsCategoryStore;
+    } else {
+      activeProductsStore.current = productStore;
+    }
+    setCurrentPage(0);
+  }, [productStore, productsCategoryStore, selectedCategories]);
+
+  useEffect(() => {
+    const sourceList = activeProductsStore.current.list;
+
+    const filteredList = searchTerm
+      ? selectedCategories.length === 0
+        ? sourceList.filter((product) =>
+            product.title.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+        : sourceList.filter((product) =>
+            product.title.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+      : sourceList;
+
+    pageNumber.current = Math.ceil(filteredList.length / elementsPerPage);
+
+    setCurrentProducts(
+      filteredList.slice(
+        currentPage * elementsPerPage,
+        currentPage * elementsPerPage + elementsPerPage
+      )
+    );
+  }, [
+    activeProductsStore.current.list,
+    currentPage,
+    searchTerm,
+    elementsPerPage,
+    selectedCategories,
+  ]);
+
+  const handleSearchChange = useCallback(
+    (value: string) => {
+      setSearchTerm(value);
+      setCurrentPage(0);
+      if (selectedCategories.length === 0) {
+        productStore.getProductsList({ title: value });
+      }
+    },
+    [productStore, selectedCategories.length]
+  );
+
+  const handleCategoryChange = (selectedOptions: Option[]) => {
+    const lastEl = selectedOptions[selectedOptions.length - 1];
+    setSelectedCategories([lastEl]);
+  };
+
+  const getTotalProducts = () => {
+    const sourceList = activeProductsStore.current.list;
+
+    const filteredList = searchTerm
+      ? sourceList.filter((product) =>
+          product.title.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      : sourceList;
+
+    // Фильтрация по выбранной категории
+    if (selectedCategories.length > 0) {
+      return filteredList.length;
+    }
+
+    return filteredList.length;
+  };
+
   return (
     <div className={styles.blockContainer}>
       <div className={styles.products}>
@@ -78,31 +192,36 @@ const Products = () => {
         </Text>
         <div className={styles.searchBar}>
           <Input
-            value=""
-            onChange={() => {}}
+            value={searchTerm}
+            onChange={handleSearchChange}
             placeholder={'Search product'}
             className={styles.searchBar__input}
           />
-          {/*<Button>{width > 1023 ? 'Find Now' : 'Search'}</Button>*/}
           <Button>{'Search'}</Button>
         </div>
         <MultiDropdown
           generateValueElement={() => {
-            return 'Filter';
+            return selectedCategories[0]
+              ? selectedCategories[0].value
+              : 'Filter';
           }}
-          options={options ? options : []}
+          options={options}
           value={selectedCategories.map(categoriesToOptions)}
-          onChange={function (): void {
-            throw new Error('Function not implemented.');
-          }}
+          onChange={handleCategoryChange}
           className={styles.filter}
         />
         <div className={styles.totalProducts}>
           <span className={styles.totalProducts__txt}>Total Products</span>
-          <span className={styles.totalProducts__count}>{totalElements}</span>
+          <span className={styles.totalProducts__count}>
+            {getTotalProducts()}
+          </span>
         </div>
         <div className={styles.productsGrid}>
-          {currentProducts ? (
+          {activeProductsStore.current.meta === Meta.loading ? (
+            <Loader />
+          ) : currentProducts.length === 0 ? (
+            <Text>No products found</Text>
+          ) : (
             currentProducts.map((product) => (
               <Link key={product.id} to={`/product/${product.id}`}>
                 <Card
@@ -111,19 +230,16 @@ const Products = () => {
                 />
               </Link>
             ))
-          ) : (
-            <Loader />
           )}
         </div>
         <PageNumbers
-          totalPages={totalPages}
-          onChange={(cp) => {
-            setCurrentPage(cp);
-          }}
+          totalPages={pageNumber.current}
+          onChange={(cp) => setCurrentPage(cp)}
           currentPage={currentPage}
         />
       </div>
     </div>
   );
 };
-export default Products;
+
+export default observer(Products);

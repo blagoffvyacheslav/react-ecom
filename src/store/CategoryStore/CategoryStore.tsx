@@ -1,9 +1,9 @@
-import { ILocalStore } from 'store/interfaces/ILocalStore';
-import ApiStore from 'store/ApiStore';
-import { HTTPMethod } from 'store/ApiStore/types';
+import { ILocalStore } from '@store/interfaces/ILocalStore';
+import ApiStore from '@store/ApiStore';
+import { HTTPMethod } from '@store/ApiStore/types';
 
 import { ICategoryStore } from './types';
-import { Meta } from '../../utils/meta';
+import { Meta } from '@utils/meta';
 import {
   action,
   computed,
@@ -11,7 +11,7 @@ import {
   observable,
   runInAction,
 } from 'mobx';
-import { API_URL } from '../../pages/ProductCard/constants/api';
+import { API_URL } from '@pages/ProductDetailedPage/constants/api';
 import { CategoryItemModel } from '../models/categoryItem';
 
 type PrivateFields = '_list' | '_meta';
@@ -57,7 +57,7 @@ export default class CategoryStore implements ICategoryStore, ILocalStore {
       method: HTTPMethod.GET,
       data: {},
       headers: {},
-      endpoint: `/categories`,
+      endpoint: `/product-categories`,
     });
 
     runInAction(() => {

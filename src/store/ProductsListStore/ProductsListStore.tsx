@@ -1,9 +1,9 @@
-import { ILocalStore } from 'store/interfaces/ILocalStore';
-import ApiStore from 'store/ApiStore';
-import { HTTPMethod } from 'store/ApiStore/types';
+import { ILocalStore } from '@store/interfaces/ILocalStore';
+import ApiStore from '@store/ApiStore';
+import { HTTPMethod } from '@store/ApiStore/types';
 
-import { IProductStore, GetProductListParams } from './types';
-import { Meta } from '../../utils/meta';
+import { IProductListStore, GetProductListParams } from './types';
+import { Meta } from '@utils/meta';
 import {
   action,
   computed,
@@ -11,18 +11,19 @@ import {
   observable,
   runInAction,
 } from 'mobx';
-import { API_URL } from '../../pages/ProductCard/constants/api';
+import { API_URL } from '@pages/ProductDetailedPage/constants/api';
 import { ProductItemModel } from '../models/productItem';
+import { ELEMENTS_PER_PAGE } from '@pages/ProductsListPage/constants/products';
 
 type PrivateFields = '_list' | '_meta';
 
-export default class ProductStore implements IProductStore, ILocalStore {
+export default class ProductsListStore implements IProductListStore, ILocalStore {
   private readonly _apiStore = new ApiStore(API_URL);
   private _list: ProductItemModel[] = [];
   private _meta: Meta = Meta.initial;
 
   constructor() {
-    makeObservable<ProductStore, PrivateFields>(this, {
+    makeObservable<ProductsListStore, PrivateFields>(this, {
       _list: observable.ref,
       _meta: observable,
       list: computed,
@@ -46,7 +47,13 @@ export default class ProductStore implements IProductStore, ILocalStore {
 
     const response = await this._apiStore.request<ProductItemModel[]>({
       method: HTTPMethod.GET,
-      data: { ...params },
+      data: {
+        'filters[title][$containsi]': params.title,
+        'populate[0]': 'images',
+        'populate[1]': 'productCategory',
+        'pagination[page]': params.page,
+        'pagination[pageSize]': ELEMENTS_PER_PAGE,
+      },
       headers: {},
       endpoint: `/products`,
     });

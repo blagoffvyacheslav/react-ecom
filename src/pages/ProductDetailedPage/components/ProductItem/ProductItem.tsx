@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react';
-import { Product as ProductModel } from 'pages/ProductCard/constants/product';
-import Button from 'components/Button';
-import Text from 'components/Text';
+import { Product as ProductModel } from '@pages/ProductDetailedPage/constants/product';
+import Button from '@components/Button';
+import Text from '@components/Text';
 import styles from './ProductItem.module.scss';
 import { ColorEnum } from '../../../../types/colorEnum';
 
@@ -13,7 +13,7 @@ type ProductProps = React.PropsWithChildren<{
 const ProductItem = ({ product }: ProductProps) => {
   return (
     <section className={styles.Product}>
-      <img src={product.images[0]} className={styles.img} alt={product.title} />
+      <img src={product.images[0].formats.large.url} className={styles.img} alt={product.title} />
       <div className={styles.text}>
         <Text view={'title'} className={styles.title}>
           {product.title}

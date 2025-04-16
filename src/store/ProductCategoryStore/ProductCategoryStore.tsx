@@ -1,12 +1,12 @@
-import { ILocalStore } from 'store/interfaces/ILocalStore';
-import ApiStore from 'store/ApiStore';
-import { HTTPMethod } from 'store/ApiStore/types';
+import { ILocalStore } from '@store/interfaces/ILocalStore';
+import ApiStore from '@store/ApiStore';
+import { HTTPMethod } from '@store/ApiStore/types';
 
 import {
   IProductCategoryListStore,
   GetProductCategoryListParams,
 } from './types';
-import { Meta } from '../../utils/meta';
+import { Meta } from '@utils/meta';
 import {
   action,
   computed,
@@ -16,8 +16,9 @@ import {
   reaction,
   runInAction,
 } from 'mobx';
-import { API_URL } from '../../pages/ProductCard/constants/api';
+import { API_URL } from '@pages/ProductDetailedPage/constants/api';
 import { ProductItemModel } from '../models/productItem';
+import { ELEMENTS_PER_PAGE } from '@pages/ProductsListPage/constants/products';
 
 type PrivateFields = '_list' | '_meta';
 
@@ -59,9 +60,16 @@ export default class ProductCategoryStore
 
     const response = await this._apiStore.request<ProductItemModel[]>({
       method: HTTPMethod.GET,
-      data: {},
+      data: {
+        'filters[title][$containsi]': params.title,
+        'filters[productCategory][id][$eq]': params.categoryId,
+        'populate[0]': 'images',
+        'populate[1]': 'productCategory',
+        'pagination[page]': params.page,
+        'pagination[pageSize]': ELEMENTS_PER_PAGE,
+      },
       headers: {},
-      endpoint: `/categories/${params.categoryId}/products`,
+      endpoint: `/products`,
     });
 
     runInAction(() => {

@@ -1,9 +1,9 @@
-import { ILocalStore } from 'store/interfaces/ILocalStore';
-import ApiStore from 'store/ApiStore';
-import { HTTPMethod } from 'store/ApiStore/types';
+import { ILocalStore } from '@store/interfaces/ILocalStore';
+import ApiStore from '@store/ApiStore';
+import { HTTPMethod } from '@store/ApiStore/types';
 
-import { IProductCardStore, GetProductCardParams } from './types';
-import { Meta } from '../../utils/meta';
+import { IProductDetailedStore, GetProductDetailedParams } from './types';
+import { Meta } from '@utils/meta';
 import {
   action,
   computed,
@@ -13,13 +13,13 @@ import {
   reaction,
   runInAction,
 } from 'mobx';
-import { API_URL } from '../../pages/ProductCard/constants/api';
+import { API_URL } from '@pages/ProductDetailedPage/constants/api';
 import { ProductItemModel } from '../models/productItem';
 
 type PrivateFields = '_item' | '_meta';
 
-export default class ProductCardStore
-  implements IProductCardStore, ILocalStore
+export default class ProductDetailedStore
+  implements IProductDetailedStore, ILocalStore
 {
   private readonly _apiStore = new ApiStore(API_URL);
   private _item: ProductItemModel | null = null;
@@ -28,13 +28,13 @@ export default class ProductCardStore
   private _disposer: IReactionDisposer | null = null;
 
   constructor() {
-    makeObservable<ProductCardStore, PrivateFields>(this, {
+    makeObservable<ProductDetailedStore, PrivateFields>(this, {
       _item: observable,
       _meta: observable,
       item: computed,
       meta: computed,
       reset: action,
-      getProductCard: action,
+      getProductDetailed: action,
     });
     this._disposer = reaction(
       () => this._item,
@@ -50,13 +50,15 @@ export default class ProductCardStore
     return this._meta;
   }
 
-  async getProductCard(params: GetProductCardParams): Promise<void> {
+  async getProductDetailed(params: GetProductDetailedParams): Promise<void> {
     this._meta = Meta.loading;
     this._item = null;
 
     const response = await this._apiStore.request<ProductItemModel>({
       method: HTTPMethod.GET,
-      data: {},
+      data: {
+        'populate[0]': 'images'
+      },
       headers: {},
       endpoint: `/products/${params.productId}`,
     });

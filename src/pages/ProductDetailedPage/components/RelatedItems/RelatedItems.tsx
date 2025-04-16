@@ -1,27 +1,27 @@
 import { HTMLAttributes, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Product } from 'pages/ProductCard/constants/product';
-import Button from 'components/Button';
-import Card from 'components/Card';
-import { ProductModelToCardProps } from 'mappers/productMapper';
+import { Product } from '@pages/ProductDetailedPage/constants/product';
+import Button from '@components/Button';
+import Card from '@components/Card';
+import { ProductModelToCardProps } from '@mappers/productMapper';
 import styles from './RelatedItems.module.scss';
 
-import { getProducts } from '../../../Products/getProducts';
+import { getProducts } from '@pages/ProductsListPage/getProducts';
 import { MAX_RELATED_ITEMS } from '../../constants/relatedItems';
 
 type RelatedItemsProps = React.PropsWithChildren<{
-  category: Product['category'];
+  category: Product['productCategory'];
 }> &
   HTMLAttributes<HTMLDivElement>;
 
 const RelatedItems = ({ category }: RelatedItemsProps) => {
   const [products, setProducts] = useState<Product[]>();
 
-  useEffect(() => {
-    getProducts(category.id, MAX_RELATED_ITEMS).then((response) =>
-      setProducts(response.data)
-    );
-  }, [category.id]);
+  // useEffect(() => {
+  //   getProducts(category.id, MAX_RELATED_ITEMS).then((response) =>
+  //     setProducts(response.data)
+  //   );
+  // }, [category.id]);
   if (!products) {
     return null;
   }

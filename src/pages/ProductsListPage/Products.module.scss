@@ -1,6 +1,6 @@
-@use 'styles';
-@use 'colors' as *;
-@use 'spacing' as *;
+@use '@styles' as styles;
+@use '@colors' as *;
+@use '@spacing' as *;
 
 .products {
   align-self: center;

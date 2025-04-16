@@ -1,6 +1,6 @@
-@use 'mixins';
-@use 'styles';
-@use 'colors' as *;
+@use '@mixins' as mixins;
+@use '@styles' as styles;
+@use '@colors' as *;
 
 .header {
   width: 1440px;

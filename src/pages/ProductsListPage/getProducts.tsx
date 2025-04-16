@@ -1,4 +1,4 @@
-import { Category, Product } from '../ProductCard/constants/product';
+import { Category, Product } from '../ProductDetailedPage/constants/product';
 import { instance } from '../../api/axiosInstance';
 
 export async function getProducts(category_id?: Category['id'], limit = -1) {

@@ -1,5 +1,12 @@
 import { CategoryItemModel } from './categoryItem';
 
+
+// export type Images = {
+//   id: number;
+//   formats:
+//
+// }
+
 export type ProductItemModel = {
   id: number;
   title: string;

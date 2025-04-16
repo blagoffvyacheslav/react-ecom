@@ -65,7 +65,6 @@ export const ProductsListPage = observer(() => {
     const params: any = {};
     if (searchTerm) params.title = searchTerm;
     if (selectedCategory) params.categoryId = selectedCategory;
-    if (pageNumber) params.page = pageNumber;
     if (selectedCategory) {
       productsCategoryStore.getProductsList(params);
       activeProductsStore.current = productsCategoryStore;

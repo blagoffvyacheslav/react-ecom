@@ -39,6 +39,7 @@ export const MultiDropdown = ({
   }
 
   const ref = useRef<HTMLDivElement>(null);
+  // @ts-ignore
   useClickOutside(ref, () => setIsOpen(false));
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions

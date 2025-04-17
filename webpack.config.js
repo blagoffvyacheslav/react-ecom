@@ -16,10 +16,10 @@ const getSettingsForStyles = (withModules = false) => [
     options: {
       modules: withModules
         ? {
-          namedExport: false,
-          localIdentName: isProd ? '[hash:base64]' : '[path][name]__[local]',
-          exportLocalsConvention: 'asIs'
-        }
+            namedExport: false,
+            localIdentName: isProd ? '[hash:base64]' : '[path][name]__[local]',
+            exportLocalsConvention: 'asIs',
+          }
         : false,
     },
   },
@@ -33,8 +33,7 @@ const getSettingsForStyles = (withModules = false) => [
   },
   {
     loader: 'sass-loader',
-    options: {
-    },
+    options: {},
   },
 ];
 
@@ -87,7 +86,7 @@ module.exports = () => ({
             presets: [
               '@babel/preset-env',
               ['@babel/preset-react', { runtime: 'automatic' }],
-              '@babel/preset-typescript'
+              '@babel/preset-typescript',
             ],
             plugins: [!isProd && 'react-refresh/babel'].filter(Boolean),
           },
@@ -121,9 +120,9 @@ module.exports = () => ({
     }),
     !isProd && new ReactRefreshWebpackPlugin(),
     isProd &&
-    new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
-    }),
+      new MiniCssExtractPlugin({
+        filename: '[name].[contenthash].css',
+      }),
     new TsCheckPlugin(),
   ].filter(Boolean),
 });

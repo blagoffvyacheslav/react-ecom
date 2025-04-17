@@ -1,40 +1,40 @@
-# 🛍 ECommerce
+# 🏍 ECommerce
 
-🎨 Интерфейс интернет-магазина, разработанный на основе макета из [Figma](https://www.figma.com/design/V105wd67bkF2X7oOzCLPEG/E-commerce). Приложение демонстрирует витрину товаров, корзину и функциональность взаимодействия с пользователем.
+🎨 A user interface for an online store based on the [Figma design](https://www.figma.com/design/V105wd67bkF2X7oOzCLPEG/E-commerce). The app includes a product showcase, shopping cart, and user interaction functionality.
 
-## 🚀 Стек технологий
+## ✨ Tech Stack
 
 - **React**
 - **TypeScript**
-- **MobX** — управление состоянием
-- **React Router** — маршрутизация
-- **Vite** — сборка
-- **Prettier & ESLint** — стиль и качество кода
+- **MobX** — state management
+- **React Router** — routing
+- **Vite** — build tool
+- **Prettier & ESLint** — code formatting and linting
 
-## 🛠 Установка и запуск проекта
+## 🛠 Getting Started
 
 ```bash
-# Установка зависимостей
+# Install dependencies
 npm install
 
-# Запуск в режиме разработки
+# Start the development server
 npm run dev
 vite dev
 
-# Сборка проекта
+# Build the project
 npm run build
 
-# Запуск ESLint
+# Run ESLint
 npm run lint
 
-# Автофикс линтера
+# Auto-fix ESLint issues
 npm run lint:fix
 
-# Форматирование Prettier
+# Format code with Prettier
 npm run format
 ```
 
-## 📀 Настройка Prettier
+## 📀 Prettier Configuration
 
 📂 **.prettierrc**:
 
@@ -49,7 +49,7 @@ npm run format
 }
 ```
 
-📅 **Добавление prettier в зависимости:**
+📆 **Install Prettier as a dev dependency:**
 
 ```bash
 npm install --save-dev prettier
@@ -65,4 +65,5 @@ npm install --save-dev prettier
 
 ---
 
-📅 Проект в разработке.
+📆 Project is currently under development.
+

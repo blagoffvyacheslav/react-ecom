@@ -64,7 +64,8 @@ export const ProductsListPage = observer(() => {
   React.useEffect(() => {
     const params: GetProductListParams = {};
     if (searchTerm) params.title = searchTerm;
-    if (selectedCategory) { // @ts-ignore
+    if (selectedCategory) {
+      // @ts-ignore
       params.categoryId = selectedCategory;
     }
     if (currentPage) params.page = currentPage;

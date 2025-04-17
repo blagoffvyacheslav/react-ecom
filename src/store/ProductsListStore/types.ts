@@ -1,6 +1,9 @@
 export type GetProductListParams = {
   title?: string;
-  page: number;
+  page?: number;
+  categoryId?: number;
+  pageSize?: number;
+  excludeId?: number;
 };
 
 export interface IProductListStore {

@@ -8,6 +8,8 @@
 }
 
 .loader {
+  animation: spin 1s linear infinite;
+  stroke-width: 4;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -39,9 +39,14 @@ export default class ApiStore implements IApiStore {
     return [endpoint, options];
   }
 
-  async request<SuccessT, ErrorT = unknown, ReqT = Record<string, unknown>>(
+  async request<
+    SuccessT,
+    ErrorT = unknown,
+    MetaT = unknown,
+    ReqT = Record<string, unknown>,
+  >(
     params: RequestParams<ReqT>
-  ): Promise<ApiResponse<SuccessT, ErrorT>> {
+  ): Promise<ApiResponse<SuccessT, ErrorT, MetaT>> {
     try {
       const response = await fetch(...this._getRequestData(params));
       const data = await response.json();
@@ -49,12 +54,14 @@ export default class ApiStore implements IApiStore {
       return {
         success: response.ok,
         data: data.data,
+        meta: data.meta,
         status: response.status,
       };
     } catch (e) {
       return {
         success: false,
         data: null,
+        meta: null,
         status: StatusHTTP.UNEXPECTED_ERROR,
       };
     }

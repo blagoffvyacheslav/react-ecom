@@ -8,7 +8,10 @@ export class QueryParamsStore {
 
   private _disposer: IReactionDisposer | null = null;
 
-  constructor(initialSearch: string, onQueryChange: (newSearch: string) => void) {
+  constructor(
+    initialSearch: string,
+    onQueryChange: (newSearch: string) => void
+  ) {
     makeAutoObservable(this);
 
     const params = qs.parse(initialSearch, { ignoreQueryPrefix: true });
@@ -62,7 +65,7 @@ export class QueryParamsStore {
   reset(): void {
     this._page = 1;
     this._title = '';
-    this._category = ''
+    this._category = '';
   }
 
   destroy(): void {

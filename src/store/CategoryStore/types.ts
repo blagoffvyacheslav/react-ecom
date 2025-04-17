@@ -1,5 +1,5 @@
 export type GetCategoryListParams = {
-  category: string;
+  categoryId: number;
 };
 
 export interface ICategoryStore {

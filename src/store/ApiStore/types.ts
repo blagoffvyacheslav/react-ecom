@@ -30,27 +30,35 @@ export enum StatusHTTP {
 }
 
 // Ответ API
-export type ApiResponse<SuccessT, ErrorT> =
+export type ApiResponse<SuccessT, MetaT, ErrorT> =
   | {
       success: true;
       data: SuccessT;
+      meta: MetaT;
       status: StatusHTTP;
     }
   | {
       success: false;
       data: ErrorT;
+      meta: MetaT;
       status: StatusHTTP;
     }
   | {
       success: false;
       data: null;
+      meta: null;
       status: StatusHTTP;
     };
 
 export interface IApiStore {
   readonly baseUrl: string;
 
-  request<SuccessT, ErrorT = unknown, ReqT = Record<string, unknown>>(
+  request<
+    SuccessT,
+    ErrorT = unknown,
+    MetaT = unknown,
+    ReqT = Record<string, unknown>,
+  >(
     params: RequestParams<ReqT>
-  ): Promise<ApiResponse<SuccessT, ErrorT>>;
+  ): Promise<ApiResponse<SuccessT, MetaT, ErrorT>>;
 }

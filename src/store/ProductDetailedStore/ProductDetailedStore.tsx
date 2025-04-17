@@ -57,7 +57,8 @@ export default class ProductDetailedStore
     const response = await this._apiStore.request<ProductItemModel>({
       method: HTTPMethod.GET,
       data: {
-        'populate[0]': 'images'
+        'populate[0]': 'images',
+        'populate[1]': 'productCategory',
       },
       headers: {},
       endpoint: `/products/${params.productId}`,

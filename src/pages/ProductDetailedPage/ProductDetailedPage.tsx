@@ -8,9 +8,8 @@ import { observer, useLocalStore } from 'mobx-react-lite';
 import ProductDetailedStore from '@store/ProductDetailedStore/ProductDetailedStore';
 import { Meta } from '@utils/meta';
 import Loader from '@components/Loader';
-import { toJS } from 'mobx';
 
-const ProductDetailedPage = () => {
+export const ProductDetailedPage = () => {
   const URLparams = useParams() as { id: string | undefined };
   const [product, setProduct] = React.useState<ProductModel | null>(null);
   const navigate = useNavigate();
@@ -30,21 +29,24 @@ const ProductDetailedPage = () => {
   }, [URLparams.id, navigate, productDetailedStore]);
 
   React.useEffect(() => {
-    console.log('prod', toJS(productDetailedStore.item))
     setProduct(productDetailedStore.item);
   }, [location, productDetailedStore.meta, productDetailedStore.item]);
-
   return (
     <div className={styles.blockContainer}>
       <div className={styles.ProductCard}>
-        {productDetailedStore.meta === Meta.loading && <Loader/>}
+        {productDetailedStore.meta === Meta.loading && <Loader />}
 
-        {productDetailedStore.meta === Meta.error && <div>Oops! Something went wrong while fetching the product.</div>}
+        {productDetailedStore.meta === Meta.error && (
+          <div>Oops! Something went wrong while fetching the product.</div>
+        )}
 
         {product && productDetailedStore.meta === Meta.success && (
           <>
             <ProductItem product={product} />
-            <RelatedItems category={product.category} />
+            <RelatedItems
+              category={product.productCategory}
+              excludeId={product.id}
+            />
           </>
         )}
       </div>

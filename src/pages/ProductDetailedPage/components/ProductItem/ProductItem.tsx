@@ -13,7 +13,11 @@ type ProductProps = React.PropsWithChildren<{
 const ProductItem = ({ product }: ProductProps) => {
   return (
     <section className={styles.Product}>
-      <img src={product.images[0].formats.large.url} className={styles.img} alt={product.title} />
+      <img
+        src={product.images[0].formats.large.url}
+        className={styles.img}
+        alt={product.title}
+      />
       <div className={styles.text}>
         <Text view={'title'} className={styles.title}>
           {product.title}

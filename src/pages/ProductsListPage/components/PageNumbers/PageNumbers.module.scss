@@ -1,0 +1,19 @@
+@use '@colors' as *;
+
+.pageNumbers {
+  padding-top: 45px;
+  display: flex;
+  justify-content: center;
+}
+.pageNumber {
+  min-width: 38px;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selected {
+  background-color: $button-primary-bg;
+  color: $button-primary-text;
+}

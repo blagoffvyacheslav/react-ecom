@@ -1,0 +1,16 @@
+@use '@styles' as styles;
+
+.product {
+  display: flex;
+  flex-direction: column;
+}
+
+.blockContainer {
+  @include styles.block-container;
+}
+
+.ProductCard {
+  background-color: #fafafa;
+  @include styles.internal-container;
+  max-width: 1440px;
+}

@@ -7,6 +7,7 @@
     "jsx": "react-jsx",
     "baseUrl": "src",
     "strict": true,
+    "target": "ES2020",
     "paths": {
       "@components/*": ["components/*"],
       "@mappers/*": ["mappers/*"],
@@ -19,16 +20,9 @@
       "@types/*": ["types/*"],
       "@pages/*": ["pages/*"],
       "@store/*": ["store/*"],
-      "@App": ["App/*"]
-    },
-    "files": [],
-    "references": [
-      {
-        "path": "./tsconfig.app.json"
-      },
-      {
-        "path": "./tsconfig.node.json"
-      }
-    ]
-  }
+      "@App/*": ["App/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }

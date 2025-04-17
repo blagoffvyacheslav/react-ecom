@@ -11,15 +11,19 @@
   margin-bottom: 20px;
   justify-content: center;
   text-align: center;
+
+  &__item {
+  }
+
   @media (max-width: 1023px) {
     font-size: 26px;
   }
 }
 
 .blockContainer {
-  @include styles.block-container;
   background-color: #fafafa;
   padding-top: 100px;
+  @include styles.block-container;
 }
 
 .p1 {
@@ -27,53 +31,65 @@
   max-width: 640px;
   text-align: center;
   margin-bottom: 60px;
+
   @media (max-width: 1023px) {
     font-size: 14px;
   }
 }
+
 .searchBar {
   display: flex;
   gap: $space-xl;
   margin-bottom: $space-xl;
+
   @media (max-width: 1023px) {
     font-size: 18px;
   }
+
+  &__input {
+    flex-grow: 1;
+  }
 }
-.searchBar__input {
-  flex-grow: 1;
-}
+
 .filter {
   align-self: flex-start;
 }
+
 .totalProducts {
   display: flex;
   align-self: flex-start;
   align-items: center;
   margin: 50px 0;
-}
-.totalProducts__txt {
-  font-weight: 700;
-  font-size: 44px;
-  @media (max-width: 1023px) {
-    font-size: 18px;
+
+  &__txt {
+    font-weight: 700;
+    font-size: 44px;
+
+    @media (max-width: 1023px) {
+      font-size: 18px;
+    }
+  }
+
+  &__count {
+    padding: 5px 16px;
+    background: #f9f9f9;
+    border-radius: 20px;
+    color: $text-accent;
+    font-weight: 700;
   }
 }
-.totalProducts__count {
-  padding: 5px 16px;
-  background: #f9f9f9;
-  border-radius: 20px;
-  color: $text-accent;
-  font-weight: 700;
-}
+
 .productsGrid {
   width: 100%;
   display: flex;
   justify-content: left;
   flex-wrap: wrap;
   gap: 60px;
+
   & a {
     text-decoration: none;
   }
+
   @media (max-width: 1023px) {
     gap: 15px;
   }

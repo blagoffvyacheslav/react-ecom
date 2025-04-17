@@ -5,7 +5,8 @@ import Button from '@components/Button';
 import Card from '@components/Card';
 import Input from '@components/Input';
 import Loader from '@components/Loader';
-import { MultiDropdown, Option } from '@components/MultiDropdown';
+import { Option } from '@components/MultiDropdown/types';
+import MultiDropdown from '@components/MultiDropdown';
 import Text from '@components/Text';
 import {
   Category,
@@ -31,7 +32,6 @@ export const ProductsListPage = observer(() => {
   const categoryStore = useLocalStore(() => new CategoryStore());
   const location = useLocation();
   const navigate = useNavigate();
-
   const queryParamsStore = useLocalStore(
     () =>
       new QueryParamsStore(location.search, (newSearch) => {
@@ -64,7 +64,9 @@ export const ProductsListPage = observer(() => {
   React.useEffect(() => {
     const params: GetProductListParams = {};
     if (searchTerm) params.title = searchTerm;
-    if (selectedCategory) params.categoryId = selectedCategory;
+    if (selectedCategory) { // @ts-ignore
+      params.categoryId = selectedCategory;
+    }
     if (currentPage) params.page = currentPage;
 
     params.pageSize = ELEMENTS_PER_PAGE;

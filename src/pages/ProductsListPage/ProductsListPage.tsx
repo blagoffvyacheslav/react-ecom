@@ -19,6 +19,7 @@ import loaderStyles from '@components/Loader/Loader.module.scss';
 import { ColorEnum } from '../../types/colorEnum';
 import ProductListStore from '@store/ProductsListStore/ProductsListStore';
 import CategoryStore from '@store/CategoryStore/CategoryStore';
+import { userCartStore } from '@store/UserCartStore';
 import { QueryParamsStore } from '@store/QueryParamsStore/QueryParamsStore';
 import { ELEMENTS_PER_PAGE } from './constants/products';
 import debounce from 'lodash.debounce';
@@ -183,7 +184,17 @@ export const ProductsListPage = observer(() => {
               >
                 <Card
                   {...ProductModelToCardProps(product)}
-                  actionSlot={<Button>Add to Cart</Button>}
+                  actionSlot={
+                    <Button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        userCartStore.addItem(product, 1);
+                      }}
+                    >
+                      Add to Cart
+                    </Button>
+                  }
                 />
               </Link>
             ))}

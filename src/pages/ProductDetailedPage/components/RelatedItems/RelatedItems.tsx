@@ -8,6 +8,7 @@ import { ProductModelToCardProps } from '@mappers/productMapper';
 import styles from './RelatedItems.module.scss';
 import ProductListStore from '@store/ProductsListStore/ProductsListStore';
 import Loader from '@components/Loader';
+import { userCartStore } from '@store/UserCartStore';
 
 type RelatedItemsProps = React.PropsWithChildren<{
   category: Product['productCategory'];
@@ -51,7 +52,17 @@ const RelatedItems = observer(({ category, excludeId }: RelatedItemsProps) => {
           <Link key={product.documentId} to={`/product/${product.documentId}`}>
             <Card
               {...ProductModelToCardProps(product)}
-              actionSlot={<Button>Add to Cart</Button>}
+              actionSlot={
+                <Button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    userCartStore.addItem(product, 1);
+                  }}
+                >
+                  Add to Cart
+                </Button>
+              }
             />
           </Link>
         ))}

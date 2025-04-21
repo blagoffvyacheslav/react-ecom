@@ -15,23 +15,23 @@
 
 ```bash
 # Install dependencies
-npm install
+yarn
 
 # Start the development server
-npm run dev
+yarn dev
 vite dev
 
 # Build the project
-npm run build
+yarn build
 
 # Run ESLint
-npm run lint
+yarn lint
 
 # Auto-fix ESLint issues
-npm run lint:fix
+yarn lint:fix
 
 # Format code with Prettier
-npm run format
+yarn format
 ```
 
 ## 📀 Prettier Configuration
@@ -49,10 +49,10 @@ npm run format
 }
 ```
 
-📆 **Install Prettier as a dev dependency:**
+🗖 **Install Prettier as a dev dependency:**
 
 ```bash
-npm install --save-dev prettier
+yarn add --dev prettier
 ```
 
 **package.json**:
@@ -65,5 +65,4 @@ npm install --save-dev prettier
 
 ---
 
-📆 Project is currently under development.
-
+🗖 Project is currently under development.

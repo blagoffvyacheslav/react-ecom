@@ -140,14 +140,15 @@
   }
 }
 
-@mixin icon() {
-  width: 30px;
-  height: 30px;
+@mixin icon($width: 30px, $height: 30px) {
+  width: $width;
+  height: $height;
 }
 
 .right {
   display: flex;
   gap: 24px;
+  align-items: center;
 
   @media (max-width: 1023px) {
     order: 1;
@@ -167,4 +168,9 @@
 .user {
   @include icon;
   background-image: url('./img/user.svg');
+}
+
+.cardLabel {
+  @include icon(65px, 65px);
+  background-image: url('./img/cardLabel.svg');
 }

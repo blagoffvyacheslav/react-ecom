@@ -1,0 +1,94 @@
+@use '@colors' as *;
+@use '@spacing' as *;
+@use '@styles' as *;
+
+.miniCart {
+  display: flex;
+  flex-direction: column;
+  gap: $space-l;
+  padding: $space-l;
+  position: absolute;
+  top: 100px;
+  right: 50px;
+  background-color: white;
+  z-index: 10;
+  box-shadow: var(--shadow);
+}
+
+.card {
+  text-align: left;
+  $length: 348px;
+  display: flex;
+  color: $text-primary;
+  flex-direction: column;
+  width: $length;
+  background-color: $card-bg;
+  padding: $space-l;
+
+  &:hover {
+    box-shadow: var(--shadow-hover);
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: $space-xs;
+  }
+
+  &__caption {
+    font-size: 18px;
+    color: $text-secondary;
+    font-weight: bold;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: $space-xs;
+    padding: $space-xs 0;
+    border-bottom: 1px solid;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: $space-xxs;
+  }
+
+  &__name {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  &__qty {
+    font-size: 12px;
+    color: $text-secondary;
+  }
+
+  &__price {
+    font-size: 14px;
+    font-weight: bold;
+    color: $text-primary;
+  }
+
+  &__total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: $space-l;
+    border-top: 1px solid;
+    padding-top: $space-xs;
+  }
+
+  &__totalLabel {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  &__totalAmount {
+    font-size: 16px;
+    font-weight: bold;
+    color: $text-primary;
+  }
+}

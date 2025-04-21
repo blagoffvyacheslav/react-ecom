@@ -4,6 +4,8 @@ import Button from '@components/Button';
 import Text from '@components/Text';
 import styles from './ProductItem.module.scss';
 import { ColorEnum } from '../../../../types/colorEnum';
+import { userCartStore } from '@store/UserCartStore';
+import { useNavigate } from 'react-router-dom';
 
 type ProductProps = React.PropsWithChildren<{
   product: ProductModel;
@@ -11,6 +13,11 @@ type ProductProps = React.PropsWithChildren<{
   HTMLAttributes<HTMLDivElement>;
 
 const ProductItem = ({ product }: ProductProps) => {
+  const navigate = useNavigate();
+  const handleBuyNow = () => {
+    userCartStore.addItem(product);
+    navigate('/cart');
+  };
   return (
     <section className={styles.Product}>
       <img
@@ -33,8 +40,15 @@ const ProductItem = ({ product }: ProductProps) => {
           ${product.price}
         </Text>
         <Text className={styles.buttons}>
-          <Button>Buy Now</Button>
-          <Button skin={'secondary'}>Add to Chart</Button>
+          <Button onClick={() => handleBuyNow()}>Buy Now</Button>
+          <Button
+            skin={'secondary'}
+            onClick={(e) => {
+              userCartStore.addItem(product, 1);
+            }}
+          >
+            Add to Cart
+          </Button>
         </Text>
       </div>
     </section>

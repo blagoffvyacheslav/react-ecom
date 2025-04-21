@@ -44,6 +44,7 @@ module.exports = () => ({
   entry: './src/main.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/react-ecom/',
     filename: 'bundle.[contenthash].js',
     clean: true, // Очищает папку dist перед новой сборкой
     publicPath: '/',

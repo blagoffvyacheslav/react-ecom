@@ -169,8 +169,3 @@
   @include icon;
   background-image: url('./img/user.svg');
 }
-
-.cardLabel {
-  @include icon(65px, 65px);
-  background-image: url('./img/cardLabel.svg');
-}

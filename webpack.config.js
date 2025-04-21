@@ -47,7 +47,6 @@ module.exports = () => ({
     publicPath: '/react-ecom/',
     filename: 'bundle.[contenthash].js',
     clean: true, // Очищает папку dist перед новой сборкой
-    publicPath: '/',
     assetModuleFilename: 'assets/[name].[contenthash][ext]',
   },
   resolve: {

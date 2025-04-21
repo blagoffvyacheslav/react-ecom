@@ -7,9 +7,11 @@
   position: sticky;
   top: 0;
   background-color: $header-bg;
+
   & a {
     text-decoration: none;
   }
+
   @media (max-width: 1023px) {
     border-bottom: 0;
     padding-top: 20px;
@@ -18,13 +20,15 @@
 }
 
 .header__inner {
-  @include styles.block-container;
   padding-left: 7%;
   padding-right: 7%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @include styles.block-container;
   @include mixins.bottom-line;
+
   @media (max-width: 1023px) {
     flex-direction: column;
   }
@@ -33,11 +37,12 @@
 .logoAndItem {
   display: flex;
   justify-content: space-between;
+
   @media (max-width: 1023px) {
-    @include mixins.bottom-line;
     padding-bottom: 15px;
     margin-bottom: 5px;
     width: 100%;
+    @include mixins.bottom-line;
   }
 }
 
@@ -64,6 +69,7 @@
   justify-content: center;
   gap: 6.25px;
   width: 35px;
+
   @media (max-width: 1023px) {
     display: flex;
   }
@@ -101,6 +107,7 @@
   display: flex;
   gap: 60px;
   align-items: center;
+
   @media (max-width: 1023px) {
     display: none;
     background-color: $header-bg;
@@ -118,13 +125,14 @@
   padding: 32px 0 36px 0;
 
   &._current {
-    font-weight: bold; /* Добавляем жирное начертание текста */
+    font-weight: bold;
     color: $text-accent;
     border-bottom: 3px solid $text-accent;
   }
 
   @media (max-width: 1023px) {
     padding: 15px 20px;
+
     &._current {
       color: $text-accent;
       border: 3px solid $text-accent;
@@ -140,6 +148,7 @@
 .right {
   display: flex;
   gap: 24px;
+
   @media (max-width: 1023px) {
     order: 1;
     display: none;

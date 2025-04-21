@@ -1,3 +1,5 @@
 @mixin bottom-line($color: #f3f3f3) {
-  border-bottom: 1px solid $color;
+  & {
+    border-bottom: 1px solid $color;
+  }
 }

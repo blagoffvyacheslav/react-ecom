@@ -1,6 +1,3 @@
-/*
-видно. что шрифт не Roboto, а с засечками. У меня такая же проблема VSCode. Когда делаю yarn -start и на страницу помещаю Card, то шрифт правильный, как в css прописан. А как делаю  yarn-test, так картинки с неверным шрифтом.
-*/
 @font-face {
   font-family: 'Roboto';
   src: url('Roboto-Regular.woff2') format('woff2');

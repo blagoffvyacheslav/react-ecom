@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { observer } from 'mobx-react-lite';
 import { userCartStore } from '@store/UserCartStore';
 import styles from './MiniCart.module.scss';
 
 const MiniCart = observer(() => {
-  const lastItems = userCartStore.lastItems;
+  const { lastItems } = userCartStore;
 
-  const totalAmount = lastItems.reduce(
-    (total, [item, qty]) => total + item.price * qty,
-    0
-  );
+  const totalAmount = useMemo(() => {
+    return lastItems.reduce(
+      (total, [item, qty]) => total + item.price * qty,
+      0
+    );
+  }, [lastItems]);
 
   return (
     <div className={styles.miniCart}>

@@ -4,10 +4,12 @@ import { userCartStore } from '@store/UserCartStore';
 import Button from '@components/Button';
 import CardItem from '@components/CartItem';
 import Text from '@components/Text';
+import CheckoutModal from '@components/CheckoutModal';
 import styles from './CartPage.module.scss';
 
 export const CartPage = observer(() => {
   const [currentItems, setCurrentItems] = React.useState(userCartStore.items);
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   React.useEffect(() => {
     setCurrentItems(userCartStore.items);
@@ -15,11 +17,13 @@ export const CartPage = observer(() => {
 
   const getTotalPrice = () => {
     return Array.from(userCartStore.items.entries()).reduce(
-      (total, [product, qty]) => {
-        return total + product.price * qty; // вычисляем цену для каждого товара
-      },
+      (total, [product, qty]) => total + product.price * qty,
       0
     );
+  };
+
+  const handleCheckout = (address: string, paymentMethod: string) => {
+    userCartStore.checkout(address, paymentMethod);
   };
 
   return (
@@ -73,14 +77,20 @@ export const CartPage = observer(() => {
           <div className={styles.cartTotal__amount}>{getTotalPrice()} $</div>
         </div>
 
-        {currentItems.size > 0 ? (
+        {currentItems.size > 0 && (
           <div className={styles.cartActions}>
-            <Button onClick={() => userCartStore.checkout()}>
+            <Button onClick={() => setIsModalOpen(true)}>
               Proceed to Checkout
             </Button>
           </div>
-        ) : null}
+        )}
       </div>
+
+      <CheckoutModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onCheckout={handleCheckout}
+      />
     </div>
   );
 });

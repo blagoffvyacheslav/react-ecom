@@ -17,11 +17,10 @@
 
 .card {
   text-align: left;
-  $length: 348px;
   display: flex;
   color: $text-primary;
   flex-direction: column;
-  width: $length;
+  width: 348px;
   background-color: $card-bg;
   padding: $space-l;
 

@@ -42,7 +42,7 @@ const ProductItem = ({ product }: ProductProps) => {
         <Text className={styles.buttons}>
           <Button onClick={() => handleBuyNow()}>Buy Now</Button>
           <Button
-            skin={'secondary'}
+            skin="secondary"
             onClick={(e) => {
               userCartStore.addItem(product, 1);
             }}

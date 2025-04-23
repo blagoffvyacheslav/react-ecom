@@ -1,6 +1,11 @@
 # 🏍 ECommerce
 
-🎨 A user interface for an online store based on the [Figma design](https://www.figma.com/design/V105wd67bkF2X7oOzCLPEG/E-commerce). The app includes a product showcase, shopping cart, and user interaction functionality.
+🎨 A user interface for an online store based on the [Figma design](https://www.figma.com/design/V105wd67bkF2X7oOzCLPEG/E-commerce).  
+The app includes a product showcase, shopping cart, and user interaction functionality.
+
+🚀 [![Live Demo](https://img.shields.io/badge/Live-Demo-blue?style=for-the-badge)](https://blagoffvyacheslav.github.io/react-ecom)
+
+---
 
 ## ✨ Tech Stack
 
@@ -8,8 +13,10 @@
 - **TypeScript**
 - **MobX** — state management
 - **React Router** — routing
-- **Vite** — build tool
+- **Webpack** — build tool
 - **Prettier & ESLint** — code formatting and linting
+
+---
 
 ## 🛠 Getting Started
 
@@ -19,7 +26,6 @@ yarn
 
 # Start the development server
 yarn dev
-vite dev
 
 # Build the project
 yarn build
@@ -33,6 +39,8 @@ yarn lint:fix
 # Format code with Prettier
 yarn format
 ```
+
+---
 
 ## 📀 Prettier Configuration
 
@@ -59,10 +67,35 @@ yarn add --dev prettier
 
 ```json
 "scripts": {
-  "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\""
+  "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"
 }
 ```
 
 ---
 
-🗖 Project is currently under development.
+## 🚀 Deployment
+
+To deploy the project to GitHub Pages:
+
+```bash
+yarn deploy
+```
+
+Make sure `homepage` in your `package.json` is correctly set:
+
+```json
+"homepage": "https://blagoffvyacheslav.github.io/react-ecom"
+```
+
+In your `index.html`, use relative paths, like:
+
+```html
+<link rel="stylesheet" href="./styles/styles.css" />
+```
+
+---
+
+## 📌 Status
+
+✅ **Project is completed.**  
+🧩 Responsive design and new features will be added in future updates.

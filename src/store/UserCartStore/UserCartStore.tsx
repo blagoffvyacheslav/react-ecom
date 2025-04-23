@@ -4,7 +4,11 @@ import { makeAutoObservable, runInAction } from 'mobx';
 const STORAGE_KEY = 'user-cart';
 
 export class UserCartStore {
-  checkout(): void {}
+  checkout(address: string, paymentMethod: string): void {
+    // Логика оформления заказа
+    console.log('Order submitted:', this._items, address, paymentMethod);
+    this.clear();
+  }
 
   private _items: Map<Product, number> = new Map();
 

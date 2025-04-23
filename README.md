@@ -1,6 +1,11 @@
 # 🏍 ECommerce
 
-🎨 A user interface for an online store based on the [Figma design](https://www.figma.com/design/V105wd67bkF2X7oOzCLPEG/E-commerce). The app includes a product showcase, shopping cart, and user interaction functionality.
+🎨 A user interface for an online store based on the [Figma design](https://www.figma.com/design/V105wd67bkF2X7oOzCLPEG/E-commerce).  
+The app includes a product showcase, shopping cart, and user interaction functionality.
+
+🚀 [![Live Demo](https://img.shields.io/badge/Live-Demo-blue?style=for-the-badge)](https://blagoffvyacheslav.github.io/react-ecom)
+
+---
 
 ## ✨ Tech Stack
 
@@ -8,31 +13,34 @@
 - **TypeScript**
 - **MobX** — state management
 - **React Router** — routing
-- **Vite** — build tool
+- **Webpack** — build tool
 - **Prettier & ESLint** — code formatting and linting
+
+---
 
 ## 🛠 Getting Started
 
 ```bash
 # Install dependencies
-npm install
+yarn
 
 # Start the development server
-npm run dev
-vite dev
+yarn dev
 
 # Build the project
-npm run build
+yarn build
 
 # Run ESLint
-npm run lint
+yarn lint
 
 # Auto-fix ESLint issues
-npm run lint:fix
+yarn lint:fix
 
 # Format code with Prettier
-npm run format
+yarn format
 ```
+
+---
 
 ## 📀 Prettier Configuration
 
@@ -49,21 +57,45 @@ npm run format
 }
 ```
 
-📆 **Install Prettier as a dev dependency:**
+🗖 **Install Prettier as a dev dependency:**
 
 ```bash
-npm install --save-dev prettier
+yarn add --dev prettier
 ```
 
 **package.json**:
 
 ```json
 "scripts": {
-  "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\""
+  "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"
 }
 ```
 
 ---
 
-📆 Project is currently under development.
+## 🚀 Deployment
 
+To deploy the project to GitHub Pages:
+
+```bash
+yarn deploy
+```
+
+Make sure `homepage` in your `package.json` is correctly set:
+
+```json
+"homepage": "https://blagoffvyacheslav.github.io/react-ecom"
+```
+
+In your `index.html`, use relative paths, like:
+
+```html
+<link rel="stylesheet" href="./styles/styles.css" />
+```
+
+---
+
+## 📌 Status
+
+✅ **Project is completed.**  
+🧩 Responsive design and new features will be added in future updates.

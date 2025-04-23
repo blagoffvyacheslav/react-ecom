@@ -1,0 +1,58 @@
+@use '@styles' as styles;
+@use '@colors' as *;
+@use '@spacing' as *;
+
+.blockContainer {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.page {
+  padding: 80px 20px;
+  width: 100%;
+  min-width: 136vh;
+}
+
+.pageTitle {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.cardRow {
+  display: flex;
+  gap: 1rem;
+}
+
+.card {
+  flex: 1 1 48%;
+  min-width: 300px;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.sectionTitle {
+  margin-bottom: 1rem;
+}
+
+.greenInput {
+  margin-bottom: 1.2rem;
+  border: 1px solid #4caf50;
+  border-radius: 8px;
+  padding: 0.8rem;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.greenInput:focus {
+  border-color: #2e7d32;
+  outline: none;
+}
+
+.actions {
+  text-align: center;
+  margin-top: 2rem;
+}
